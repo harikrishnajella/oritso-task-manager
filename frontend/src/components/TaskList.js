@@ -26,6 +26,8 @@ const TaskList = () => {
   });
   const [error, setError] = useState('');
 
+  let apiUrl= 'https://oritso-task-manager-backend.onrender.com/api/tasks'
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -39,7 +41,7 @@ const TaskList = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/tasks');
+      const { data } = await axios.get(apiUrl);
       setTasks(data);
     } catch (err) {
       setError('Failed to load tasks.');
@@ -60,9 +62,9 @@ const TaskList = () => {
     e.preventDefault();
     try {
       if (editingTaskId) {
-        await axios.put(`http://localhost:5000/api/tasks/${editingTaskId}`, formData);
+        await axios.put(`${apiUrl}/${editingTaskId}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/tasks', formData);
+        await axios.post(apiUrl, formData);
       }
       fetchTasks();
       setShowForm(false);
@@ -82,7 +84,7 @@ const TaskList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+        await axios.delete(`${apiUrl}/${id}`);
         fetchTasks();
       } catch (err) {
         setError('Error deleting task.');
