@@ -21,7 +21,7 @@ db.serialize(() => {
       title TEXT NOT NULL,
       description TEXT,
       dueDate TEXT,
-      status TEXT CHECK(status IN ('pending', 'in-progress', 'completed')) DEFAULT 'pending',
+      status TEXT CHECK(status IN ('Pending', 'In-progress', 'Completed')) DEFAULT 'Pending',
       createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
       updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
     )
